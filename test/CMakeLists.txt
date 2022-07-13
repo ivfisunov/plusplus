@@ -10,7 +10,7 @@ target_link_libraries(${BINARY}_test
     gtest
     gtest_main
     pthread
-    ${BINARY}_version
+    ${BINARY}_utils
 )
 
 add_test(${BINARY}_test ${BINARY}_test)
