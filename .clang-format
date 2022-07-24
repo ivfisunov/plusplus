@@ -1,3 +1,4 @@
+
 BasedOnStyle: Mozilla
 AlignAfterOpenBracket: AlwaysBreak
 AlignEscapedNewlines : Right

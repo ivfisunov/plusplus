@@ -1,31 +1,36 @@
 #include <iostream>
+#include <map>
 #include <vector>
-#include <algorithm>
 
-#include "utils.h"
+#include "alloc.h"
 
-
-int main(int, char **)
+int fact(int n)
 {
-    IpPool ipPool{};
+    return (n == 0) || (n == 1) ? 1 : n * fact(n - 1);
+}
 
-    for (std::string line; std::getline(std::cin, line);) {
-        std::vector<std::string> ip = utils::split(line, '\t');
-        ipPool.push_back(utils::split(ip.at(0), '.'));
+template<typename T>
+void print(const T& m)
+{
+    for (const auto& [k, v] : m) {
+        std::cout << k << " " << v << std::endl;
     }
+}
 
-    utils::sortIpPool(ipPool);
-    utils::print(ipPool);
+int main(int, char**)
+{
+    std::map<int, int> generalAllocMap{};
+    for (int i = 0; i < 10; ++i) {
+        generalAllocMap[i] = fact(i);
+    }
+    print(generalAllocMap);
 
-    IpPool filteredPool1 = utils::filter(ipPool, 1);
-    utils::print(filteredPool1);
-
-    IpPool filteredPool2 = utils::filter(ipPool, 46, 70);
-    utils::print(filteredPool2);
-
-    IpPool filteredPoolAny = utils::filter_any(ipPool, 46);
-    utils::print(filteredPoolAny);
-
+    std::map<int, int, std::less<int>, alloc::CustomAllocator<std::pair<const int, int>>>
+        customAllocMap{};
+    for (int i = 0; i < 10; ++i) {
+        customAllocMap[i] = fact(i);
+    }
+    print(customAllocMap);
 
     return 0;
 }
