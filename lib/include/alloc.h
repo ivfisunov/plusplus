@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <cstdlib>
 #include <new>
 
@@ -26,6 +27,20 @@ class CustomAllocator
         using other = CustomAllocator<U, N>;
     };
 
+    template<typename U, typename... Args>
+    void construct(U *p, Args &&...args)
+    {
+        // std::cout << "construct" << std::endl;
+        new (p) U(std::forward<Args>(args)...);
+    };
+
+    template<typename U>
+    void destroy(U *p)
+    {
+        // std::cout << "destroy" << std::endl;
+        p->~U();
+    }
+
   private:
     T *start;
     T *p;
@@ -36,6 +51,7 @@ class CustomAllocator
 template<typename T, int N>
 T *CustomAllocator<T, N>::allocate(std::size_t n)
 {
+    // std::cout << "allocate\n";
     if (n > cap) {
         throw std::bad_array_new_length();
     }
@@ -59,6 +75,7 @@ T *CustomAllocator<T, N>::allocate(std::size_t n)
 template<typename T, int N>
 void CustomAllocator<T, N>::deallocate(T *p, std::size_t n)
 {
+    // std::cout << "deallocate\n";
 }
 
 template<typename T, int N>
