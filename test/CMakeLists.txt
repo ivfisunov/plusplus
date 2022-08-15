@@ -1,6 +1,7 @@
 find_package(GTest REQUIRED)
 
-add_executable(${BINARY}_test test_alloc.cpp)
+# add_executable(${BINARY}_test test_alloc.cpp)
+add_executable(${BINARY}_test test_print_ip.cpp)
 
 target_include_directories(${BINARY}_test PRIVATE
     ${CMAKE_SOURCE_DIR}/lib/include

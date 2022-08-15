@@ -1,36 +1,16 @@
-#include <iostream>
-#include <map>
-#include <vector>
+#include "print_ip.h"
 
-#include "alloc.h"
-
-int fact(int n)
-{
-    return (n == 0) || (n == 1) ? 1 : n * fact(n - 1);
-}
-
-template<typename T>
-void print(const T& m)
-{
-    for (const auto& [k, v] : m) {
-        std::cout << k << " " << v << std::endl;
-    }
-}
+using namespace print_ip;
 
 int main(int, char**)
 {
-    std::map<int, int> generalAllocMap{};
-    for (int i = 0; i < 10; ++i) {
-        generalAllocMap[i] = fact(i);
-    }
-    print(generalAllocMap);
-
-    std::map<int, int, std::less<int>, alloc::CustomAllocator<std::pair<const int, int>>>
-        customAllocMap{};
-    for (int i = 0; i < 10; ++i) {
-        customAllocMap[i] = fact(i);
-    }
-    print(customAllocMap);
+    print(makeIp(int8_t(-1)));
+    print(makeIp(int16_t(0)));
+    print(makeIp(int32_t(2130706433)));
+    print(makeIp(int64_t(8875824491850138409)));
+    print(makeIp(std::string{"Hello, World!"}));
+    print(makeIp(std::vector<int>{100, 200, 300, 400}));
+    print(makeIp(std::list<short>{400,300, 200, 100}));
 
     return 0;
 }
