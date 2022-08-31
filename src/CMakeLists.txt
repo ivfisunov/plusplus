@@ -6,7 +6,6 @@ target_include_directories(${BINARY} PRIVATE
 
 target_link_libraries(${BINARY} PRIVATE
     ${BINARY}_version
-    ${BINARY}_utils
 )
 
 install(TARGETS ${BINARY} RUNTIME DESTINATION bin)
