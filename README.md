@@ -1,3 +1,3 @@
 ## plus plus course
 
-### Print ip from any source. Templates and SFINAE
+### Sparse multi dimential matrix implementation
