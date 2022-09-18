@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(PATCH_VERSION "1" CACHE INTERNAL "Patch version")
 set(PROJECT_VERSION 0.0.${PATCH_VERSION})
 
-project(matrix VERSION ${PROJECT_VERSION})
+project(bulk VERSION ${PROJECT_VERSION})
 
 set(BINARY ${PROJECT_NAME})
 
@@ -25,8 +25,8 @@ set(CPACK_PACKAGE_CONTACT example@example.com)
 
 include(CPack)
 
-enable_testing()
+# enable_testing()
 
 add_subdirectory(src)
 add_subdirectory(lib)
-add_subdirectory(test)
+# add_subdirectory(test)

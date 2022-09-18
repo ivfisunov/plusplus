@@ -1,29 +1,23 @@
 #include <iostream>
-#include "matrix.h"
 
-int main(int, char**)
+#include "product/command_proc.h"
+#include "product/console_processing.h"
+#include "product/file_processing.h"
+
+int main(int argc, char** argv)
 {
-    Matrix<int, 0> matrix;
-
-    for (int i = 0; i < 10; ++i) {
-        matrix[i][i] = i;
-        matrix[i][9 - i] = 9 - i;
+    if (argc < 2) {
+        std::cerr << "Provide command block size." << std::endl;
+        std::cerr << "Usage: " << argv[0] << "3" << std::endl;
+        return 1;
     }
 
-    for (int y = 1; y < 9; ++y) {
-        for (int x = 1; x < 9; ++x) {
-            std::cout << matrix[x][y] << " ";
-        }
-        std::cout << std::endl;
-    }
+    bulk::Command cmd(std::stoi(argv[1]));
 
-    std::cout << std::endl << "Matrix size = " << matrix.size() << std::endl;
+    bulk::ConsoleProcessing cp(&cmd);
+    bulk::FileProcessing fp(&cmd);
 
-    std::cout << std::endl << "All matrix elements:" << std::endl;
-    for (const auto& elem : matrix) {
-        const auto& [x, y, v] = elem;
-        std::cout << x << y << v << std::endl;
-    }
+    cmd.StartProcessing();
 
     return 0;
 }
